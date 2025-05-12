@@ -3,7 +3,7 @@ from .forms import OrderForm
 from .models import OrderItem, Order
 from cart.cart import Cart
 from django.contrib.auth.decorators import login_required
-from main.models import Seller
+from main.models import Specialist
 from django.conf import settings
 import stripe
 
@@ -34,11 +34,11 @@ def order_create(request):
             order.save()
 
             for item in cart:
-                seller_instance = Seller.objects.get(name=item['seller'])
+                specialist_instance = Specialist.objects.get(name=item['specialist'])
                 OrderItem.objects.create(
                     order=order,
                     product=item['item'],
-                    seller=seller_instance,
+                    specialist=specialist_instance,
                     quantity=item['quantity'],
                     total_price=item['total_price'],
                 )

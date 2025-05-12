@@ -13,10 +13,10 @@ class Cart:
         self.cart = cart
 
     
-    def add(self, product, seller, quantity=1):
+    def add(self, product, specialist, quantity=1):
         item_id = str(product.id)
         if item_id not in self.cart:
-            self.cart[item_id] = {"quantity": 0, "seller": seller}
+            self.cart[item_id] = {"quantity": 0, "specialist": specialist}
         self.cart[item_id]["quantity"] = quantity
         self.save()
 
@@ -50,11 +50,11 @@ class Cart:
         for item in items:
             total_price = item.current_price
             quantity = self.cart[str(item.id)]["quantity"]
-            seller = self.cart[str(item.id)]["seller"]
+            specialist = self.cart[str(item.id)]["specialist"]
             yield {
                 "item": item,
                 "quantity": quantity,
-                "seller": seller,
+                "specialist": specialist,
                 "total_price": total_price * quantity,
                 "current_price": total_price,
             }

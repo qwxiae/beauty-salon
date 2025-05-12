@@ -38,14 +38,14 @@
         {% endfor %}
 
         <!-- set SELLER filtration -->
-        <h4 class="seller-head">Artists</h4>
-        {% for seller in sellers %}
+        <h4 class="specialist-head">Artists</h4>
+        {% for specialist in specialists %}
             <div class="category-option">   
-                <input type="checkbox" name="seller" id="seller-{{ seller.name }}" value="{{ seller.name }}"
-                {% if seller.name in selected_sellers %}checked{% endif %} onchange="applyFilters()">
-                <label for="seller-{{ seller.name }}">
-                    <div class="seller-name">    
-                    {{ seller.name }}
+                <input type="checkbox" name="specialist" id="specialist-{{ specialist.name }}" value="{{ specialist.name }}"
+                {% if specialist.name in selected_specialists %}checked{% endif %} onchange="applyFilters()">
+                <label for="specialist-{{ specialist.name }}">
+                    <div class="specialist-name">    
+                    {{ specialist.name }}
                     </div>
                 </label>
             </div>

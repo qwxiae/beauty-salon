@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Product, Category, Discount, \
-    ProductImage, Seller, ProductSeller
+    ProductImage, Specialist, ProductSpecialist
 
 
 class ProductImageInline(admin.TabularInline):
@@ -8,13 +8,13 @@ class ProductImageInline(admin.TabularInline):
     extra = 3
 
 
-class ProductSellerInline(admin.TabularInline):
-    model = ProductSeller
+class ProductSpecialistInline(admin.TabularInline):
+    model = ProductSpecialist
     extra = 3
 
 
-@admin.register(Seller)
-class SellerAdmin(admin.ModelAdmin):
+@admin.register(Specialist)
+class SpecialistAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
@@ -35,7 +35,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ("is_available", "category")
     prepopulated_fields = {"slug": ("name",)}
     ordering = ("-created_at",)
-    inlines = [ProductImageInline, ProductSellerInline]
+    inlines = [ProductImageInline, ProductSpecialistInline]
 
 
 @admin.register(Discount)

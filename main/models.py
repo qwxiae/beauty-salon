@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator
 
 
-class Seller(models.Model):
+class Specialist(models.Model):
     name = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
@@ -49,8 +49,8 @@ class Discount(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(unique=True)
-    seller = models.ManyToManyField(
-        Seller, through="ProductSeller",
+    specialist = models.ManyToManyField(
+        Specialist, through="ProductSpecialist",
         related_name="product",
         blank=True
     )
@@ -103,10 +103,10 @@ class ProductImage(models.Model):
         return f"{self.product.name} - {self.image.name}"
 
 
-class ProductSeller(models.Model):
+class ProductSpecialist(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
 
     class Meta:
-        # todo: do not allow them to repeat sellers
-        unique_together = ("product", "seller")
+        # todo: do not allow them to repeat specialists
+        unique_together = ("product", "specialist")

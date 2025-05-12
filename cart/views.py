@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .cart import Cart
 from django.views import View
-from main.models import Product, ProductSeller, Seller
+from main.models import Product, ProductSpecialist, Specialist
 
 
 def cart_detail(request):
@@ -13,33 +13,33 @@ def cart_detail(request):
 def cart_add(request, item_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=item_id)
-    seller = request.POST.get('seller')
+    specialist = request.POST.get('specialist')
 
-    if seller:
+    if specialist:
         try:
-            seller_obj = Seller.objects.get(name=seller)
-            product_seller = ProductSeller.objects.get(
+            specialist_obj = Specialist.objects.get(name=specialist)
+            product_specialist = ProductSpecialist.objects.get(
                 product=product,
-                seller=seller_obj
+                specialist=specialist_obj
             )
-        except Seller.DoesNotExist:
-            print('seller does not exist')
+        except Specialist.DoesNotExist:
+            print('specialist does not exist')
             return redirect('cart:cart_detail')
-        except ProductSeller.DoesNotExist:
+        except ProductSpecialist.DoesNotExist:
             print('product does not exist')
             return redirect('cart:cart_detail')
     else:
-        # if seller is gone replace him 
-        # available_sellers = product.seller
-        available_sellers = ProductSeller.objects.filter(
+        # if specialist is gone replace him 
+        # available_specialists = product.specialist
+        available_specialists = ProductSpecialist.objects.filter(
             product=product)
-        if available_sellers.exists():
-            seller_obj = available_sellers.first().seller
-            seller = seller_obj.name
+        if available_specialists.exists():
+            specialist_obj = available_specialists.first().specialist
+            specialist = specialist_obj.name
         else:
             return redirect('cart:cart_detail')
     
-    cart.add(product, seller)
+    cart.add(product, specialist)
     return redirect('cart:cart_detail')
 
 
@@ -63,7 +63,7 @@ class CartUpdateView(View):
         prodcut = get_object_or_404(Product, id=item_id)
 
         if quantity > 0:
-            cart.add(prodcut, cart.cart[str(item_id)]['seller'], quantity)
+            cart.add(prodcut, cart.cart[str(item_id)]['specialist'], quantity)
         else:
             cart.remove(prodcut)
 

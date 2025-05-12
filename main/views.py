@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from .models import Product, Category, Discount, Seller, ProductSeller
+from .models import Product, Category, Discount, Specialist, ProductSpecialist
 from django.db.models import Min, Max
 
 
@@ -14,17 +14,17 @@ class CatalogView(ListView):
         queryset = super().get_queryset()
         # read query parameters from URL
         # /catalog/?category=clothing&discount=summer-sale&min_price=10&max_price=50
-        seller_names = self.request.GET.getlist('seller')
+        specialist_names = self.request.GET.getlist('specialist')
         category_slugs = self.request.GET.getlist("category")
         discount_slugs = self.request.GET.getlist("discount")
         min_price = self.request.GET.get("min_price")
         max_price = self.request.GET.get("max_price")
 
         # filter using query parameters
-        if seller_names:
+        if specialist_names:
             # filter using the intermediate model's name
-            # django creates the property productseller automatically
-            queryset = queryset.filter(productseller__seller__name__in=seller_names).distinct()
+            # django creates the property productspecialist automatically
+            queryset = queryset.filter(productspecialist__specialist__name__in=specialist_names).distinct()
 
         if category_slugs:
             queryset = queryset.filter(category__slug__in=category_slugs)
@@ -66,12 +66,12 @@ class CatalogView(ListView):
     def get_context_data(self, **kwargs):
         """Add extra context variables to the template"""
         context = super().get_context_data(**kwargs)
-        context["sellers"] = Seller.objects.all()
+        context["specialists"] = Specialist.objects.all()
         context["categories"] = Category.objects.all()
         context["discounts"] = Discount.objects.all()
         context["selected_categories"] = self.request.GET.getlist("category")
         context["selected_discounts"] = self.request.GET.getlist("discount")
-        context["selected_sellers"] = self.request.GET.getlist("seller")
+        context["selected_specialists"] = self.request.GET.getlist("specialist")
         context["min_price"] = self.request.GET.get("min_price", "")
         context["max_price"] = self.request.GET.get("max_price", "")
         # context["lowest_price"] = Product.objects.aggregate(Min("price"))["price__min"] or 0
@@ -91,9 +91,9 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.object
-        available_sellers = ProductSeller.objects.filter(
+        available_specialists = ProductSpecialist.objects.filter(
             product=product)
-        context['available_sellers'] = available_sellers
+        context['available_specialists'] = available_specialists
         return context
 
 
