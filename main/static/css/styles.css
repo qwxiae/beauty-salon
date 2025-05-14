@@ -499,15 +499,15 @@ input[type="number"]::-webkit-outer-spin-button{
     width: 250px;
 }
 
-.p-on-order {
+.p-on-appointment {
     width: 250px;
 }
 
-.order-item{
+.appointment-item{
     padding: 10px;
 }
 
-.order {
+.appointment {
     border-bottom: 1px solid #010101;
     padding: 40px 0 40px 20px;
 }

@@ -4,7 +4,7 @@
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
-    <h1 class="text-center mb-5">Orders history</h1>
+    <h1 class="text-center mb-5">Appointments history</h1>
     <div class="profile d-flex flex-column gap-4 justify-content-center">
         <div class="profile-history">
             <div class="table-head d-flex justify-content-between align-items-center">
@@ -18,16 +18,16 @@
                 </div>
             </div>
             <div class="table-items">
-                {% if orders|length == 0 %}
-                    <div class="empty-orders-message text-center">
-                        <h3 class="mt-5">You have no orders.</h3>
+                {% if appointments|length == 0 %}
+                    <div class="empty-appointments-message text-center">
+                        <h3 class="mt-5">You have no appointments.</h3>
                     </div>
                 {% else %}
-                    {% for order in orders %}
-                        <div class="order">
-                            Order №{{ order.id }}
-                            {% for item in order.items.all %}
-                                <div class="order-item d-flex justify-content-between align-items-center">
+                    {% for appointment in appointments %}
+                        <div class="appointment">
+                            Appointment №{{ appointment.id }}
+                            {% for item in appointment.items.all %}
+                                <div class="appointment-item d-flex justify-content-between align-items-center">
                                     <div class="left-side-items d-flex">
                                         <div class="c-item-img">
                                             <img src="{{ item.procedure.image.url }}" alt="">
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <div class="track mt-2">Tracking number: {{ order.tracking_number }}</div> 
+                            <div class="track mt-2">Tracking number: {{ appointment.tracking_number }}</div> 
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -62,7 +62,7 @@
         <form method="post" class="profile-form">
             {% csrf_token %}
             <div class="form-blocks d-flex gap-4">
-                <h3 class="mb-5 mt-5">Ordering data</h3>
+                <h3 class="mb-5 mt-5">Appointmenting data</h3>
                 <div class="block1 d-flex flex-column gap-1">
                     {{ form.first_name.label_tag }} {{ form.first_name }} <br>
                     {{ form.last_name.label_tag }} {{ form.last_name }} <br>
@@ -74,8 +74,8 @@
                 <div class="block2 d-flex flex-column gap-1">
                     {{ form.apartment_number.label_tag }} {{ form.apartment_number }} <br>
                     {{ form.postal_code.label_tag }} {{ form.postal_code }} <br>
-                    <div class="p-on-order d-flex flex-column justify-content-center align-items-center">
-                        <p class="block-tag mt-4 text-center">The information will be used when placing an order.</p>
+                    <div class="p-on-appointment d-flex flex-column justify-content-center align-items-center">
+                        <p class="block-tag mt-4 text-center">The information will be used when placing an appointment.</p>
                     </div>
                 </div>
             </div>

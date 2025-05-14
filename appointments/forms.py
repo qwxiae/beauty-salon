@@ -1,9 +1,9 @@
 from django import forms
-from .models import Order
+from .models import Appointment
 
 
-class OrderForm(forms.ModelForm):
+class AppointmentForm(forms.ModelForm):
     class Meta:
-        model = Order
+        model = Appointment
         fields = ['first_name', 'last_name', 'middle_name',
                   'phone_number']

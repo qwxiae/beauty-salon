@@ -61,8 +61,8 @@
         {% if cart|length > 0 %}
             <h3 class="total_price_cart mt-5">Total price: ${{ cart.get_total_price|floatformat:2 }}</h3>
             <div class="d-flex justify-content-end mt-3">
-                <a href="{% url 'orders:order_create' %}" class="default-btn mt-3">Create order</a>
-                {% comment %} <a href="" class="default-btn mt-3">Create order</a> {% endcomment %}
+                <a href="{% url 'appointments:appointment_create' %}" class="default-btn mt-3">Create appointment</a>
+                {% comment %} <a href="" class="default-btn mt-3">Create appointment</a> {% endcomment %}
             </div>
         {% endif %}
     </div>

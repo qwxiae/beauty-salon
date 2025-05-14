@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Appointment Failure{% endblock title %}
+
+{% block content %}
+    <div class="success-appointment-page text-center">
+        <h2>Payment Failure. Your appointmentd has not been processed.</h2>
+        <p>We will be in touch with you shortly.</p>
+        <a href="{% url 'appointments:appointment_create' %}">Back to cart</a>
+    </div>
+{% endblock content %}

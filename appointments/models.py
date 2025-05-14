@@ -3,7 +3,7 @@ from main.models import Procedure, Specialist
 from django.conf import settings
 
 
-class Order(models.Model):
+class Appointment(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('shipped', 'Shipped'),
@@ -19,15 +19,15 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Order {self.id} from {self.first_name} {self.last_name}'
+        return f'Appointment {self.id} from {self.first_name} {self.last_name}'
     
     class Meta:
-        verbose_name = 'Order'
-        verbose_name_plural = 'Orders'
+        verbose_name = 'Appointment'
+        verbose_name_plural = 'Appointments'
 
 
-class OrderItem(models.Model):
-    order = models.ForeignKey(Order, related_name='items',
+class AppointmentItem(models.Model):
+    appointment = models.ForeignKey(Appointment, related_name='items',
                               on_delete=models.CASCADE)
     procedure = models.ForeignKey(Procedure, on_delete=models.CASCADE)
     specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
@@ -40,6 +40,6 @@ class OrderItem(models.Model):
     
 
     class Meta:
-        verbose_name = 'Order Item'
-        verbose_name_plural = 'Order Items'
+        verbose_name = 'Appointment Item'
+        verbose_name_plural = 'Appointment Items'
         

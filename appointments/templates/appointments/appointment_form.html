@@ -1,11 +1,11 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block title %}Order Create{% endblock title %}
+{% block title %}Appointment Create{% endblock title %}
 
 {% block content %}
-    <div class="order-form-container mt-5 d-flex flex-column gap-5">
-        <h1 class="text-center mb-5">Create Order</h1>
+    <div class="appointment-form-container mt-5 d-flex flex-column gap-5">
+        <h1 class="text-center mb-5">Create Appointment</h1>
         <div class="table-cart">
             <div class="table-head d-flex justify-content-between align-items-center">
                 <div class="left-side-head">
@@ -57,7 +57,7 @@
         </div>
 
         <h3 class="total_price_cart mt-3">Total price: ${{ cart.get_total_price|floatformat:2 }}</h3>
-        <div class="form-for-order">
+        <div class="form-for-appointment">
             <form method="post" class="d-flex gap-5">
                 {% csrf_token %}
 
@@ -71,16 +71,16 @@
                     <div class="block2 d-flex flex-column gap-1">
                         {{ form.apartment_number.label_tag }} {{ form.apartment_number }} <br>
                         {{ form.postal_code.label_tag }} {{ form.postal_code }} <br>
-                        <p class="p-on-order text-center mt-5">Please double-check all the information befors payment.</p>
+                        <p class="p-on-appointment text-center mt-5">Please double-check all the information befors payment.</p>
                     </div>
                 </div>
 
-                <div class="order-total-info">
-                    <div class="total-for-order d-flex flex-column gap-2">
+                <div class="appointment-total-info">
+                    <div class="total-for-appointment d-flex flex-column gap-2">
                         <div class="total-view">
-                            <h4 class="fw-bold">Total: ${{ total_price|floatformat:2 }}</h4>
+                            <h4 class="fw-bold">Total: ${{ cart.get_total_price|floatformat:2 }}</h4>
                         </div>
-                        <button class="default-btn order-form-btn">Place Order</button>
+                        <button class="default-btn appointment-form-btn">Place Appointment</button>
                     </div>
                 </div>
             </form>
