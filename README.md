@@ -1,51 +1,51 @@
-# Beauty Salon
+# Салон красоты
 
-Beauty Salon is a Django-based beauty salon booking and service catalog application. It provides a user-facing service catalog, shopping cart, appointment checkout, user accounts, and Stripe test-mode payment integration.
+Beauty Salon — это приложение для записи в салон красоты и каталога услуг, разработанное на Django. Оно предоставляет каталог услуг для пользователей, корзину, оформление записи на процедуры, личные кабинеты пользователей и интеграцию с платежной системой Stripe в тестовом режиме.
 
-## Project Overview
+## Обзор проекта
 
-- Django 5.2 project with a custom `User` model for email-based authentication.
-- `main` app manages procedures, categories, specialists, discounts, and public site pages.
-- `cart` app stores selected procedures in a session-backed cart.
-- `users` app handles registration, login, profile editing, and appointment history.
-- `appointments` app creates appointment records, saves appointment items, and uses Stripe Checkout for payments.
+* Проект на Django 5.2 с пользовательской моделью `User` для аутентификации по электронной почте.
+* Приложение `main` управляет процедурами, категориями, специалистами, скидками и публичными страницами сайта.
+* Приложение `cart` хранит выбранные процедуры в корзине на основе сессий.
+* Приложение `users` отвечает за регистрацию, вход в систему, редактирование профиля и историю записей.
+* Приложение `appointments` создаёт записи на приём, сохраняет выбранные услуги и использует Stripe Checkout для обработки платежей.
 
-## Features
+## Возможности
 
-- Home page and artists page.
-- Service catalog with filtering by category, discount, specialist, and price range.
-- Procedure detail pages with associated specialists and pricing.
-- Cart add/remove/update flows with procedure quantity and specialist selection.
-- Appointment creation for logged-in users.
-- Stripe Checkout integration for payment sessions.
-- PostgreSQL database configuration by default.
-- Media uploads for procedure and specialist images.
+* Главная страница и страница мастеров.
+* Каталог услуг с фильтрацией по категориям, скидкам, специалистам и диапазону цен.
+* Страницы подробной информации о процедурах с привязанными специалистами и ценами.
+* Добавление, удаление и обновление услуг в корзине с выбором количества процедур и специалиста.
+* Создание записи на приём для авторизованных пользователей.
+* Интеграция Stripe Checkout для создания платёжных сессий.
+* Конфигурация базы данных PostgreSQL по умолчанию.
+* Загрузка изображений процедур и специалистов.
 
-## Requirements
+## Требования
 
-- Python 3.x
-- Django 5.2
-- PostgreSQL
-- `python-dotenv`
-- `stripe`
-- `psycopg2-binary`
+* Python 3.x
+* Django 5.2
+* PostgreSQL
+* `python-dotenv`
+* `stripe`
+* `psycopg2-binary`
 
-## Setup
+## Установка
 
-1. Create a virtual environment and activate it:
+1. Создайте виртуальное окружение и активируйте его:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate
 ```
 
-2. Install required packages:
+2. Установите необходимые пакеты:
 
 ```powershell
 pip install django python-dotenv stripe psycopg2-binary
 ```
 
-3. Create a `.env` file at the repository root with the following values:
+3. Создайте файл `.env` в корневой директории проекта со следующими значениями:
 
 ```text
 POSTGRES_HOST=localhost
@@ -57,55 +57,55 @@ STRIPE_TEST_PUBLIC_KEY=your_stripe_test_public_key
 STRIPE_TEST_SECRET_KEY=your_stripe_test_secret_key
 ```
 
-4. Apply database migrations:
+4. Примените миграции базы данных:
 
 ```powershell
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-5. Create a superuser:
+5. Создайте суперпользователя:
 
 ```powershell
 python manage.py createsuperuser
 ```
 
-6. Start the development server:
+6. Запустите сервер разработки:
 
 ```powershell
 python manage.py runserver
 ```
 
-## Local URLs
+## Локальные URL-адреса
 
-- `/` — home page
-- `/artists/` — artists page
-- `/services/` — service catalog
-- `/procedure/<slug>/` — procedure detail
-- `/cart/` — cart overview
-- `/users/register/` — user registration
-- `/users/login/` — user login
-- `/users/profile/` — profile and appointments
-- `/appointments/create/` — appointment checkout
+* `/` — главная страница
+* `/artists/` — страница мастеров
+* `/services/` — каталог услуг
+* `/procedure/<slug>/` — страница процедуры
+* `/cart/` — просмотр корзины
+* `/users/register/` — регистрация пользователя
+* `/users/login/` — вход пользователя
+* `/users/profile/` — профиль и список записей
+* `/appointments/create/` — оформление записи на приём
 
-## Notes
+## Примечания
 
-- The project uses `AUTH_USER_MODEL = 'users.User'`.
-- `ecom/settings.py` configures PostgreSQL by default. For a simple local setup, replace the `DATABASES` block with SQLite settings.
-- Media files are stored under `media/` and served in development when `DEBUG=True`.
-- Stripe payment links currently use `http://localhost:8000/appointments/completed` and `http://localhost:8000/appointments/create`.
+* Проект использует `AUTH_USER_MODEL = 'users.User'`.
+* В `ecom/settings.py` по умолчанию настроена PostgreSQL. Для простой локальной разработки можно заменить блок `DATABASES` на настройки SQLite.
+* Медиафайлы хранятся в каталоге `media/` и обслуживаются в режиме разработки при `DEBUG=True`.
+* Ссылки Stripe для успешной и неуспешной оплаты в настоящее время используют адреса `http://localhost:8000/appointments/completed` и `http://localhost:8000/appointments/create`.
 
-## Project Structure
+## Структура проекта
 
-- `main/` — procedures, categories, specialists, discounts, catalog and detail views.
-- `cart/` — shopping cart logic and cart-related views.
-- `users/` — custom user model, authentication, registration, and profile.
-- `appointments/` — appointment forms, models, Stripe checkout, success/failure templates.
-- `ecom/` — Django project settings, URLs, WSGI/ASGI configuration.
+* `main/` — процедуры, категории, специалисты, скидки, каталог и страницы подробной информации.
+* `cart/` — логика корзины и связанные представления.
+* `users/` — пользовательская модель, аутентификация, регистрация и профиль.
+* `appointments/` — формы и модели записей, Stripe Checkout, шаблоны успешной и неуспешной оплаты.
+* `ecom/` — настройки проекта Django, маршруты URL, конфигурации WSGI/ASGI.
 
-## Further Improvements
+## Возможные улучшения
 
-- Add tests for cart, user auth, discounts, and appointment checkout.
-- Add proper Stripe webhook handling for payment confirmations.
-- Improve error handling for invalid cart items and Stripe failures.
-- Add admin configuration for procedure images and service management.
+* Добавить тесты для корзины, аутентификации пользователей, скидок и оформления записи.
+* Реализовать полноценную обработку Stripe Webhook для подтверждения платежей.
+* Улучшить обработку ошибок при некорректных данных корзины и сбоях Stripe.
+* Добавить расширенную настройку административной панели для изображений процедур и управления услугами.
