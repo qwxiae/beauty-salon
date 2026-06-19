@@ -1,111 +1,122 @@
-# Салон красоты (mini e-commerce project)
+🌍 Languages: [🇬🇧 English](README.md) | [🇷🇺 Русский](README.ru.md)
+Beauty Salon (Mini E-Commerce Project)
 
-Приложение для записи в салон красоты и каталога услуг, разработанное на Django. Оно предоставляет каталог услуг для пользователей, корзину, оформление записи на процедуры, личные кабинеты пользователей и интеграцию с платежной системой Stripe в тестовом режиме.
+Application for booking appointments at a beauty salon and browsing a
+service catalog, developed with Django. It provides a service catalog
+for users, a shopping cart, appointment booking for procedures, user
+accounts, and integration with the Stripe payment system in test mode.
 
-## Обзор проекта
+Project Overview
 
-* Проект на Django 5.2 с пользовательской моделью `User` для аутентификации по электронной почте.
-* Приложение `main` управляет процедурами, категориями, специалистами, скидками и публичными страницами сайта.
-* Приложение `cart` хранит выбранные процедуры в корзине на основе сессий.
-* Приложение `users` отвечает за регистрацию, вход в систему, редактирование профиля и историю записей.
-* Приложение `appointments` создаёт записи на приём, сохраняет выбранные услуги и использует Stripe Checkout для обработки платежей.
+-   Django 5.2 project with a custom User model for email-based
+    authentication.
+-   The main application manages procedures, categories, specialists,
+    discounts, and public website pages.
+-   The cart application stores selected procedures in a session-based
+    shopping cart.
+-   The users application handles registration, login, profile editing,
+    and appointment history.
+-   The appointments application creates appointments, stores selected
+    services, and uses Stripe Checkout for payment processing.
 
-## Возможности
+Features
 
-* Главная страница и страница мастеров.
-* Каталог услуг с фильтрацией по категориям, скидкам, специалистам и диапазону цен.
-* Страницы подробной информации о процедурах с привязанными специалистами и ценами.
-* Добавление, удаление и обновление услуг в корзине с выбором количества процедур и специалиста.
-* Создание записи на приём для авторизованных пользователей.
-* Интеграция Stripe Checkout для создания платёжных сессий.
-* Конфигурация базы данных PostgreSQL по умолчанию.
-* Загрузка изображений процедур и специалистов.
+-   Home page and specialists page.
+-   Service catalog with filtering by categories, discounts,
+    specialists, and price range.
+-   Detailed procedure pages with assigned specialists and pricing.
+-   Add, remove, and update services in the cart with procedure quantity
+    and specialist selection.
+-   Appointment booking for authenticated users.
+-   Stripe Checkout integration for creating payment sessions.
+-   PostgreSQL database configuration by default.
+-   Uploading images for procedures and specialists.
 
-## Требования
+Requirements
 
-* Python 3.x
-* Django 5.2
-* PostgreSQL
-* `python-dotenv`
-* `stripe`
-* `psycopg2-binary`
+-   Python 3.x
+-   Django 5.2
+-   PostgreSQL
+-   python-dotenv
+-   stripe
+-   psycopg2-binary
 
-## Установка
+Installation
 
-1. Создайте виртуальное окружение и активируйте его:
+1.  Create and activate a virtual environment:
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate
-```
+    python -m venv .venv
+    .\.venv\Scripts\Activate
 
-2. Установите необходимые пакеты:
+2.  Install the required packages:
 
-```powershell
-pip install django python-dotenv stripe psycopg2-binary
-```
+    pip install django python-dotenv stripe psycopg2-binary
 
-3. Создайте файл `.env` в корневой директории проекта со следующими значениями:
+3.  Create a .env file in the project root directory with the following
+    values:
 
-```text
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_DB=db01
-STRIPE_TEST_PUBLIC_KEY=your_stripe_test_public_key
-STRIPE_TEST_SECRET_KEY=your_stripe_test_secret_key
-```
+    POSTGRES_HOST=localhost
+    POSTGRES_PORT=5432
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres
+    POSTGRES_DB=db01
+    STRIPE_TEST_PUBLIC_KEY=your_stripe_test_public_key
+    STRIPE_TEST_SECRET_KEY=your_stripe_test_secret_key
 
-4. Примените миграции базы данных:
+4.  Apply database migrations:
 
-```powershell
-python manage.py makemigrations
-python manage.py migrate
-```
+    python manage.py makemigrations
+    python manage.py migrate
 
-5. Создайте суперпользователя:
+5.  Create a superuser:
 
-```powershell
-python manage.py createsuperuser
-```
+    python manage.py createsuperuser
 
-6. Запустите сервер разработки:
+6.  Start the development server:
 
-```powershell
-python manage.py runserver
-```
+    python manage.py runserver
 
-## Локальные URL-адреса
+Local URLs
 
-* `/` — главная страница
-* `/artists/` — страница мастеров
-* `/services/` — каталог услуг
-* `/procedure/<slug>/` — страница процедуры
-* `/cart/` — просмотр корзины
-* `/users/register/` — регистрация пользователя
-* `/users/login/` — вход пользователя
-* `/users/profile/` — профиль и список записей
-* `/appointments/create/` — оформление записи на приём
+-   / — home page
+-   /artists/ — specialists page
+-   /services/ — service catalog
+-   /procedure/<slug>/ — procedure page
+-   /cart/ — view cart
+-   /users/register/ — user registration
+-   /users/login/ — user login
+-   /users/profile/ — profile and appointment list
+-   /appointments/create/ — appointment booking
 
-## Примечания
+Notes
 
-* Проект использует `AUTH_USER_MODEL = 'users.User'`.
-* В `ecom/settings.py` по умолчанию настроена PostgreSQL. Для простой локальной разработки можно заменить блок `DATABASES` на настройки SQLite.
-* Медиафайлы хранятся в каталоге `media/` и обслуживаются в режиме разработки при `DEBUG=True`.
-* Ссылки Stripe для успешной и неуспешной оплаты в настоящее время используют адреса `http://localhost:8000/appointments/completed` и `http://localhost:8000/appointments/create`.
+-   The project uses AUTH_USER_MODEL = 'users.User'.
+-   PostgreSQL is configured by default in ecom/settings.py. For simple
+    local development, you can replace the DATABASES configuration with
+    SQLite settings.
+-   Media files are stored in the media/ directory and served during
+    development when DEBUG=True.
+-   Stripe success and failure payment URLs currently use
+    http://localhost:8000/appointments/completed and
+    http://localhost:8000/appointments/create.
 
-## Структура проекта
+Project Structure
 
-* `main/` — процедуры, категории, специалисты, скидки, каталог и страницы подробной информации.
-* `cart/` — логика корзины и связанные представления.
-* `users/` — пользовательская модель, аутентификация, регистрация и профиль.
-* `appointments/` — формы и модели записей, Stripe Checkout, шаблоны успешной и неуспешной оплаты.
-* `ecom/` — настройки проекта Django, маршруты URL, конфигурации WSGI/ASGI.
+-   main/ — procedures, categories, specialists, discounts, catalog, and
+    detail pages.
+-   cart/ — cart logic and related views.
+-   users/ — custom user model, authentication, registration, and
+    profile.
+-   appointments/ — appointment forms and models, Stripe Checkout,
+    successful and failed payment templates.
+-   ecom/ — Django project settings, URL routing, WSGI/ASGI
+    configuration.
 
-## Возможные улучшения
+Possible Improvements
 
-* Добавить тесты для корзины, аутентификации пользователей, скидок и оформления записи.
-* Реализовать полноценную обработку Stripe Webhook для подтверждения платежей.
-* Улучшить обработку ошибок при некорректных данных корзины и сбоях Stripe.
-* Добавить расширенную настройку административной панели для изображений процедур и управления услугами.
+-   Add tests for the cart, user authentication, discounts, and
+    appointment booking.
+-   Implement full Stripe Webhook handling for payment confirmation.
+-   Improve error handling for invalid cart data and Stripe failures.
+-   Add advanced admin panel customization for procedure images and
+    service management.
