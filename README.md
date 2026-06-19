@@ -1,4 +1,5 @@
 🌍 Languages: [🇬🇧 English](README.md) | [🇷🇺 Русский](README.ru.md)
+
 Beauty Salon (Mini E-Commerce Project)
 
 Application for booking appointments at a beauty salon and browsing a
